@@ -43,17 +43,20 @@ const styles = StyleSheet.create({
     // flex: 1,
   },
   containerLanguages:{
+    backgroundColor: '#FFF',
     borderWidth: 0.25,
-    borderColor: '#FFF',
+    borderColor: '#EEE',
     borderRadius: 5,
     marginBottom: 15,
   },
   containerAvatar:{
+    backgroundColor: '#FFF',
     borderWidth: 0.25,
-    borderColor: '#FFF',
+    borderColor: '#EEE',
     borderRadius: 5,
-    flexDirection: 'row',
     marginBottom: 15,
+    flexDirection: 'row',
+
     // height: 60,
 
   },
@@ -177,17 +180,18 @@ const styles = StyleSheet.create({
 
 
   containerUsername:{
-    alignItems: 'center',
-    flexDirection: 'row',
+    backgroundColor: '#FFF',
     borderWidth: 0.25,
-    borderColor: '#FFF',
+    borderColor: '#EEE',
     borderRadius: 5,
     marginBottom: 25,
+    alignItems: 'center',
+    flexDirection: 'row',
     height: 50,
   },
 
   usernameInput: {
-    color: '#FFF',
+    color: '#000',
     width: '80%',
     height: '80%',
     fontWeight: "700",

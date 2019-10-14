@@ -19,6 +19,7 @@
     "react-native-calendars": "^1.212.0",
     "react-native-custom-picker": "^0.4.0",
     "react-native-datepicker": "^1.7.2",
+    "react-native-draggable": "^1.0.21",
     "react-native-elements": "^1.2.5",
     "react-native-emoji": "^1.8.0",
     "react-native-emoji-selector": "^0.1.7",
@@ -37,11 +38,13 @@
     "react-native-router-flux": "^4.0.6",
     "react-native-screens": "1.0.0-alpha.23",
     "react-native-sectioned-multi-select": "^0.7.1",
+    "react-native-svg-uri": "^1.2.3",
     "react-native-touchable-scale": "^2.0.0",
     "react-native-unimodules": "~0.5.4",
     "react-native-vector-icons": "^6.6.0",
     "react-native-web": "^0.11.7",
-    "react-navigation-material-bottom-tabs": "^2.1.2"
+    "react-navigation-material-bottom-tabs": "^2.1.2",
+    "react-poker": "0.0.77"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",
