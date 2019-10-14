@@ -36,4 +36,6 @@ target 'test' do
 
   pod 'RNI18n', :path => '../node_modules/react-native-i18n'
 
+  pod 'RNSVG', :path => '../node_modules/react-native-svg'
+
 end

@@ -159,11 +159,11 @@ const seatsList = [
               if (gesture.dy > 290) {
                   this.getCardFromDeckToHand();
               }
-              if (gesture.dx < -50 && gesture.dx > -120 && gesture.dy > -40 && gesture.dy < 50){
-                alert('sur le plateau !!!!!!!');
-                this.dropCardFromDeckOnBoard();
-
-              }
+              // if (gesture.dx < -50 && gesture.dx > -120 && gesture.dy > -40 && gesture.dy < 50){
+              //   alert('sur le plateau !!!!!!!');
+              //   this.dropCardFromDeckOnBoard();
+              //
+              // }
               this.mainPosition.setValue({ x: 0, y: 0 });
           }
       });
@@ -196,19 +196,48 @@ const seatsList = [
     getCardFromDeckToHand = async () => {
       // console.log('this.state.deck',this.state.deck);
       console.log('\n\n\n\n');
-
-      let cards = this.state.cardsHand;
-      cards.push(this.state.deck[this.state.deck.length-1]);
-      await this.setState({
-        cardsHand: cards
-      })
-      this.state.deck.pop();
+      // if(this.state.cardsHand.length<=6){
+        let cards = this.state.cardsHand;
+        cards.push(this.state.deck[this.state.deck.length-1]);
+        await this.setState({
+          cardsHand: cards
+        })
+        this.state.deck.pop();
+      // }
       // console.log('this.state.deck',this.state.deck);
-
     }
 
-    dropCardFromDeckOnBoard = async () => {
+    setImage = (image) => {
+      switch (image) {
+        case 'spades':
+        return require('../../../assets/spades.png');
+          break;
+        case 'clubs':
+        return require('../../../assets/clover.png');
+          break;
+        case 'hearts':
+        return require('../../../assets/heart.png');
+          break;
+        case 'diamonds':
+        return require('../../../assets/diamond.png');
+          break;
+        default:
+      }
+    }
 
+    dropCardFromDeckToBoard = async (a, b) => {
+      console.log('ROROOROR', a);
+      console.log('ROROOROR', b);
+
+
+      newCardsBoard = this.state.cardsBoard;
+      newCardsBoard.push({
+        "Suit": a,
+        "Value": b,
+      });
+      await this.setState({
+        cardsBoard: newCardsBoard
+      })
     }
 
     generateDeck = async () => {
@@ -276,22 +305,19 @@ const seatsList = [
 
 
     render() {
-      console.log('\n\n');
+      // console.log('\n\n');
       // console.log(this.state.deck[this.state.deck.length-1]);
-      console.log('this.state.cardsHand',this.state.cardsHand);
-      console.log('\n\n');
+      // console.log(' +++++++++++ this.state.cardsBoard',this.state.cardsBoard);
+      // console.log('\n\n');
 
       return (
 
         <ImageBackground style={styles.screenWrap} source={pokerTableBackground} blurRadius={0}>
-          {/* <Style>{test}</Style> */}
           <View style={styles.generalView}>
 
             <ImageReturnPreviousPage title={this.state.gamename} goBack={true}/>
             <Text>{this.state.players}</Text>
-
             <ImageBackground source={pokerTableItem} resizeMode='contain' style={{flex: 1, position: 'relative', borderWidth: 1}}>
-
               {seatsList.slice(0, this.state.players).map((seat, key) => (
                 <View key={key}>
                   {!this.state[seat.value]?
@@ -305,7 +331,6 @@ const seatsList = [
                   <View style={[seat.style, styles.seatTaken]}>
                     <Text style={styles.seatTakenTextElement}>{this.state[this.state.seat].username}</Text>
                     <Text style={{fontSize: 50, textAlign: 'center'}}><Emoji name={this.state[this.state.seat].emoticon}/></Text>
-                    {/* <Icon name={this.state[this.state.seat].emoticon} type='font-awesome' color='#000'/> */}
                   </View>
                   }
                 </View>
@@ -318,27 +343,35 @@ const seatsList = [
                   <Image style={{marginLeft: window.width*0.55,width: 40, height: 70, position: 'absolute'}} source={deckGameCards}/>
 
                   <Animated.View
-                        {...this.mainPanResponder.panHandlers}
-                        style={{ ...this.mainPosition.getLayout() }}
-                        >
+                    {...this.mainPanResponder.panHandlers}
+                    style={{ ...this.mainPosition.getLayout() }}
+                  >
                     <Image style={{marginLeft: window.width*0.55,width: 40, height: 70}} source={deckGameCards}/>
                   </Animated.View>
 
-
-
                   <View style={{marginLeft: window.width*0.25,width: 80, height: 80, position: 'absolute', borderWidth: 1, borderStyle: 'dashed',borderRadius: 20, borderColor: '#FFF', justifyContent: 'center', alignItems: 'center'}}>
-                    <Text style={{color: '#FFF', textAlign: 'center'}}>Drop your card here</Text>
+                    {this.state.cardsBoard.length==0?
+                      <Text style={{color: '#FFF', textAlign: 'center'}}>Drop your card here</Text>
+                      :
+                      Object.keys(this.state.cardsBoard).map((key) => (
+                        <View key={key} style={styles.containerCard}>
+                          <View style={styles.elementCard}>
+                            <View style={styles.elementCardBody}>
+                              <Text style={styles.elementValue}>{this.state.cardsBoard[key].Value}</Text>
+                              <Image source={this.setImage(this.state.cardsBoard[key].Suit)} style={styles.elementSuit}></Image>
+                            </View>
+                          </View>
+                        </View>
+                      ))
+                    }
                   </View>
-
                 </View>
               </View>
 
-
-
             </ImageBackground>
-            <PokerHand dropCardFromDeckOnBoard={this.dropCardFromDeckOnBoard} cardsHand={this.state.cardsHand}/>
-
-
+            <PokerHand
+              dropCardFromDeckToBoard={this.dropCardFromDeckToBoard}
+              cardsHand={this.state.cardsHand}/>
           </View>
         </ImageBackground>
 

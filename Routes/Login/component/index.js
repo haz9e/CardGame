@@ -277,7 +277,7 @@ export default class Login extends Component {
 
     return (
 
-      <ImageBackground style={styles.screenWrap} source={pokerTableBackgrounds} blurRadius={0}>
+      <ImageBackground style={styles.screenWrap} source={pokerTableBackground} blurRadius={0}>
         <ImageReturnPreviousPage goBack={false} title={i18n.t('navbar.title')} settings={true}/>
 
 

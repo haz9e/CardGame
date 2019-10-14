@@ -198,9 +198,37 @@ const styles = StyleSheet.create({
       right: 10,
       alignItems: 'center',
       justifyContent: 'center'
-  }
+  },
 
 
+  containerCard:{
+    flex: 1,
+    // position: 'absolute'
+  },
+  elementCard:{
+    width: 40,
+    height: 70,
+    borderRadius: 2,
+    borderWidth: 1,
+    borderColor: '#000',
+    backgroundColor: '#FFF',
+    padding: 2
+  },
+  elementCardBody:{
+    borderWidth: 1,
+    borderColor: '#000',
+    borderRadius: 2,
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  elementSuit:{
+    width: 15,
+    height: 15
+  },
+  elementValue:{
+
+  },
 
 
 });

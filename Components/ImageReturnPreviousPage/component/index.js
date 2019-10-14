@@ -4,6 +4,7 @@ import { Actions } from 'react-native-router-flux'
 import { Icon } from 'react-native-elements'
 import Modal from "react-native-modal";
 
+
 import { styles, returnBtn } from '../../../Styles/styles.js'
 
 import * as Localization from 'expo-localization';

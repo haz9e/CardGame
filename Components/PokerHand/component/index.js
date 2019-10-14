@@ -6,6 +6,9 @@ import Modal from "react-native-modal";
 
 import { styles, returnBtn } from '../styles/styles.js'
 
+import VectorCard from '../../VectorCard/component'
+import Draggable from '../../Draggable';
+
 import * as Localization from 'expo-localization';
 import i18n from 'i18n-js';
 const en = {
@@ -21,18 +24,14 @@ i18n.translations = { fr, en };
 i18n.locale = Localization.locale;
 
 
-export default class ImageReturnPreviousPage extends Component {
+export default class PokerHand extends Component {
   // https://c1ctech.com/react-native-image-picker-example/   EXAMPLE
   constructor(props){
     super(props)
     this.state = {
       modalVisible: false,
       language: '',
-
     }
-
-
-
 
     this.panelY = 0;
     this.scrollY = 0;
@@ -55,11 +54,11 @@ export default class ImageReturnPreviousPage extends Component {
             // if (gesture.dy > 290) {
             //     this.getCardFromDeckToHand();
             // }
-            if (gesture.dx > 120 && gesture.dx < 175 && gesture.dy > -370 && gesture.dy < -270){
-              alert('sur le plateau !!!!!!!');
-              this.props.dropCardFromDeckOnBoard();
-
-            }
+            // if (gesture.dx > 120 && gesture.dx < 175 && gesture.dy > -370 && gesture.dy < -270){
+            //   alert('sur le plateau !!!!!!!');
+            //   this.props.dropCardFromDeckOnBoard();
+            //
+            // }
             this.mainPosition.setValue({ x: 0, y: 0 });
         }
     });
@@ -93,20 +92,16 @@ export default class ImageReturnPreviousPage extends Component {
         {this.props.cardsHand!=undefined?
 
           Object.keys(this.props.cardsHand).map((key) => (
-          // this.props.cardsHand.map((card, key) => (
-          <Animated.View key={key}
-                {...this.mainPanResponder.panHandlers}
-                style={{ ...this.mainPosition.getLayout() }}
-                >
-            <View style={{flex: 1}}>
-              <Text style={{color:'#FFF', fontSize: 24}}>{this.props.cardsHand[key].Suit}</Text>
-              <Text style={{color:'#FFF', fontSize: 24}}>{this.props.cardsHand[key].Value}</Text>
 
-            </View>
-          </Animated.View>
+            <Draggable
+              key={key}
+              dropCardFromDeckToBoard={this.props.dropCardFromDeckToBoard}
+              suit={this.props.cardsHand[key].Suit}
+              value={this.props.cardsHand[key].Value}
+            />
 
           ))
-        :<Text>NO</Text>}
+        :<Text>Empty</Text>}
 
 
 
