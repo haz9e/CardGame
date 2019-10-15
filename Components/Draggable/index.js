@@ -9,10 +9,13 @@ import {
 } from "react-native";
 import VectorCard from '../VectorCard/component'
 
+
+// {i18n.t('login.players')}
+
+
 export default class Draggable extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       showDraggable: true,
       dropAreaValues: null,
@@ -24,7 +27,6 @@ export default class Draggable extends Component {
   componentWillMount() {
     this._val = { x:0, y:0 }
     this.state.pan.addListener((value) => this._val = value);
-    // console.log(value);
     this.panResponder = PanResponder.create({
       onStartShouldSetPanResponder: (e, gesture) => true,
       onPanResponderGrant: (e, gesture) => {
@@ -38,11 +40,9 @@ export default class Draggable extends Component {
         null, { dx: this.state.pan.x, dy: this.state.pan.y }
       ]),
       onPanResponderRelease: async (e, gesture) => {
-        console.log(gesture);
-
-        if(gesture.dx < 200){
-          // alert('dans le plateau');
-
+        console.log('gesture.dx',gesture.dx);
+        console.log('gesture.dy',gesture.dy);
+        if(gesture.dy < -200){
           Animated.timing(this.state.opacity, {
             toValue: 1,
             duration: 0
@@ -52,41 +52,11 @@ export default class Draggable extends Component {
             })
           );
           this.props.dropCardFromDeckToBoard(this.props.suit, this.props.value);
-
-
-
         }else{
           this.state.pan.setValue({ x:0, y:0})
         }
-
-
-        // if (this.isDropArea(gesture)) {
-        //   Animated.timing(this.state.opacity, {
-        //     toValue: 1,
-        //     duration: 1000
-        //   }).start(() =>
-        //     this.setState({
-        //       showDraggable: false
-        //     })
-        //   );
-        // }
       }
     });
-  }
-
-
-  // async compoentWillReceiveProps(){
-  //   await this.setState({
-  //     value: this.props.value,
-  //     suit: this.props.suit
-  //   })
-  // }
-  // dropCardFromDeckOnBoard = async () => {
-  //
-  // }
-
-  isDropArea(gesture) {
-    return gesture.moveY < 200;
   }
   setImage = (image) => {
     switch (image) {
@@ -125,7 +95,6 @@ export default class Draggable extends Component {
             {...this.panResponder.panHandlers}
             style={[panStyle]}
           >
-            {/* <VectorCard suit={this.props.suit} value={this.props.value}/> */}
             <View style={styles.containerCard}>
               <View style={styles.elementCard}>
                 <View style={styles.elementCardBody}>
@@ -135,29 +104,12 @@ export default class Draggable extends Component {
               </View>
             </View>
           </Animated.View>
-
         </View>
-
-
-        // {/* <Animated.View key={key}
-        //       {...this.mainPanResponder.panHandlers}
-        //       style={{ ...this.mainPosition.getLayout() }}
-        //       >
-        //   <View style={{flex: 1}}>
-        //
-        //     <VectorCard key={key} suit={this.props.cardsHand[key].Suit} value={this.props.cardsHand[key].Value}/>
-        //
-        //
-        //   </View>
-        // </Animated.View> */}
       );
     }
   }
 }
-
-let CIRCLE_RADIUS = 30;
 let styles = StyleSheet.create({
-
   containerCard:{
     flex: 1,
   },

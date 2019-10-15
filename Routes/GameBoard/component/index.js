@@ -3,27 +3,15 @@ import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert, Linking,
   ImageBackground, KeyboardAvoidingView, Platform, ScrollView, Dimensions,
   Image, TouchableHighlight, Picker, List, FlatList, ListItem, Animated, PanResponder} from 'react-native';
 import { FormLabel, FormInput, FormValidationMessage, Button, Divider, Icon, SearchBar, Slider } from 'react-native-elements';
-
-
+import Constants from 'expo-constants';
 
 // COMPONENTS
-import TouchableScale from 'react-native-touchable-scale'; // https://github.com/kohver/react-native-touchable-scale
-import { LinearGradient } from 'expo-linear-gradient';
-import { CustomPicker } from 'react-native-custom-picker'
-import Modal from "react-native-modal";
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { Actions } from 'react-native-router-flux';
 import EmojiSelector, { Categories } from "react-native-emoji-selector";
 import Emoji from 'react-native-emoji';
-// import Draggable from '../../Draggable';
 
 // AsyncStorage
 import { _getItem, _setItem } from '../../../helpers/AsyncStorage'
-
-// IMAGE PICKER + PERMISSIONS
-import * as ImagePicker from 'expo-image-picker';
-import Constants from 'expo-constants';
-import * as Permissions from 'expo-permissions';
 
 // I18N
 import * as Localization from 'expo-localization';
@@ -31,23 +19,18 @@ import i18n from 'i18n-js';
 import trads from '../../../Trads';
 i18n.fallbacks = true;
 i18n.translations = trads;
-i18n.locale = Localization.locale;
+// i18n.locale = Localization.locale;
 
 //IMPORTED COMPONENTS
-import SeparatorLine from '../../../Components/SeparatorLine/component'
-import PackageResultForMessages from '../../../Components/PackageResultForMessages/component'
-import ImageReturnPreviousPage from '../../../Components/ImageReturnPreviousPage/component'
+// import ImageReturnPreviousPage from '../../../Components/ImageReturnPreviousPage/component'
+import HeaderBar from '../../../Components/HeaderBar/component'
 import GameListSearchBar from '../../../Components/GameListSearchBar/component'
 import PokerHand from '../../../Components/PokerHand/component'
 
 // ASSETS
-const guide1 = require('../dist/guide1.jpg');
-// const backgroundImage = require('../../../assets/backgroundImage.jpg');
-// const pokerTable = require('../../../assets/pokerTable.jpg');
 const pokerTableBackground = require('../../../assets/pokerTableBackground.png');
 const pokerTableItem = require('../../../assets/pokerTableItem.png');
 const deckGameCards = require('../../../assets/deckGameCards.png');
-
 
 // STYLES
 import { styles, buttons } from '../styles/styles.js'
@@ -120,10 +103,6 @@ const seatsList = [
         playersCards: [],
         cardsBoard: [],
         cardsHand: [],
-        // username: 'Anonymous',
-        // typing: '',
-        // image: '',
-        // messages: [],
 
         seatOne: null,
         seatTwo: null,
@@ -131,11 +110,6 @@ const seatsList = [
         seatFour: null,
         seatFive: null,
 
-
-        // showDraggable: true,
-        // dropAreaValues: null,
-        // pan: new Animated.ValueXY(),
-        // opacity: new Animated.Value(1)
       }
 
       this.panelY = 0;
@@ -147,29 +121,16 @@ const seatsList = [
           onPanResponderMove: Animated.event([
               null, { dx: this.mainPosition.x, dy: this.mainPosition.y }
           ]),
-          // onPanResponderGrant: (event, gesture) => {
-          //     this.mainPosition.setOffset({
-          //         x: this.mainPosition.x._value,
-          //         y: this.mainPosition.y._value
-          //     });
-          //     this.mainPosition.setValue({ x: 0, y: 0 });
-          // },
           onPanResponderRelease: (e, gesture) => {
-              console.log(gesture);
               if (gesture.dy > 290) {
                   this.getCardFromDeckToHand();
               }
-              // if (gesture.dx < -50 && gesture.dx > -120 && gesture.dy > -40 && gesture.dy < 50){
-              //   alert('sur le plateau !!!!!!!');
-              //   this.dropCardFromDeckOnBoard();
-              //
-              // }
               this.mainPosition.setValue({ x: 0, y: 0 });
           }
       });
     }
 
-    async componentWillMount(){
+    componentWillMount(){
       this.generateDeck();
     }
 
@@ -177,7 +138,6 @@ const seatsList = [
       try {
         const value = await _getItem('GAMESETTINGS');
         if (value !== null) {
-          // console.log("GAMEBOARD VALUES",JSON.parse(value).username);
           let prsdValue = JSON.parse(value);
           await this.setState({
             username: prsdValue.username,
@@ -186,7 +146,6 @@ const seatsList = [
             players: prsdValue.players,
           })
         }
-
       } catch (error) {
         // Error retrieving data
         console.log('BIG ERROR !!!!!!!',error);
@@ -194,17 +153,12 @@ const seatsList = [
     }
 
     getCardFromDeckToHand = async () => {
-      // console.log('this.state.deck',this.state.deck);
-      console.log('\n\n\n\n');
-      // if(this.state.cardsHand.length<=6){
-        let cards = this.state.cardsHand;
-        cards.push(this.state.deck[this.state.deck.length-1]);
-        await this.setState({
-          cardsHand: cards
-        })
-        this.state.deck.pop();
-      // }
-      // console.log('this.state.deck',this.state.deck);
+      let cards = this.state.cardsHand;
+      cards.push(this.state.deck[this.state.deck.length-1]);
+      await this.setState({
+        cardsHand: cards
+      })
+      this.state.deck.pop();
     }
 
     setImage = (image) => {
@@ -226,10 +180,6 @@ const seatsList = [
     }
 
     dropCardFromDeckToBoard = async (a, b) => {
-      console.log('ROROOROR', a);
-      console.log('ROROOROR', b);
-
-
       newCardsBoard = this.state.cardsBoard;
       newCardsBoard.push({
         "Suit": a,
@@ -242,9 +192,7 @@ const seatsList = [
 
     generateDeck = async () => {
       const { suitsInit, cardsInit } = this.state;
-
     	var deck = new Array();
-
     	for(var i = 0; i < suitsInit.length; i++)
     	{
     		for(var x = 0; x < cardsInit.length; x++)
@@ -261,32 +209,22 @@ const seatsList = [
 
     shuffleDeck = () => {
       const { deck } = this.state;
-
-    	// for 1000 turns
-    	// switch the values of two random cards
     	for (var i = 0; i < 1000; i++)
     	{
     		var location1 = Math.floor((Math.random() * deck.length));
     		var location2 = Math.floor((Math.random() * deck.length));
     		var tmp = deck[location1];
-
     		deck[location1] = deck[location2];
     		deck[location2] = tmp;
     	}
-      // console.log('deck',deck);
-
-    	// renderDeck();
     }
 
     manageSeatAvailability = (seat) => {
-      console.log(seat);
       const { username, emoticon } = this.state;
-
       if(this.state.seat){
-        alert('You already sitting elsewhere');
+        alert(i18n.t('game.alreadySitting'));
       }else{
         if(!this.state[seat]){
-          console.log('null');
           let userObj = {
             seat: seat,
             username: username,
@@ -297,27 +235,26 @@ const seatsList = [
             seat: seat
           })
         }else{
-          alert('This seat is taken');
+          alert(i18n.t('game.seatTaken'));
         }
       }
     }
 
+    ckeckIfSitting = () => {
+      if(this.state.seat){
+        alert('You must select a seat first');
+      }else{
 
+      }
+    }
 
     render() {
-      // console.log('\n\n');
-      // console.log(this.state.deck[this.state.deck.length-1]);
-      // console.log(' +++++++++++ this.state.cardsBoard',this.state.cardsBoard);
-      // console.log('\n\n');
-
       return (
+        <ImageBackground source={pokerTableBackground} blurRadius={0}>
+          <View style={styles.screenView}>
 
-        <ImageBackground style={styles.screenWrap} source={pokerTableBackground} blurRadius={0}>
-          <View style={styles.generalView}>
-
-            <ImageReturnPreviousPage title={this.state.gamename} goBack={true}/>
-            <Text>{this.state.players}</Text>
-            <ImageBackground source={pokerTableItem} resizeMode='contain' style={{flex: 1, position: 'relative', borderWidth: 1}}>
+            <HeaderBar title={this.state.gamename} goBack={true}/>
+            <ImageBackground source={pokerTableItem} resizeMode='contain' style={{flex: 1, position: 'relative'}}>
               {seatsList.slice(0, this.state.players).map((seat, key) => (
                 <View key={key}>
                   {!this.state[seat.value]?
@@ -335,23 +272,18 @@ const seatsList = [
                   }
                 </View>
               ))}
-
-
-
-              <View style={{borderWidth: 1, width: '100%', height: '100%', justifyContent: 'center',alignItems: 'center'}}>
+              <View style={{width: '100%', height: '100%', justifyContent: 'center',alignItems: 'center'}}>
                 <View>
                   <Image style={{marginLeft: window.width*0.55,width: 40, height: 70, position: 'absolute'}} source={deckGameCards}/>
-
                   <Animated.View
                     {...this.mainPanResponder.panHandlers}
                     style={{ ...this.mainPosition.getLayout() }}
                   >
-                    <Image style={{marginLeft: window.width*0.55,width: 40, height: 70}} source={deckGameCards}/>
+                    <Image style={{marginLeft: window.width*0.55,width: 40, height: 70, zIndex: 999}} source={deckGameCards}/>
                   </Animated.View>
-
                   <View style={{marginLeft: window.width*0.25,width: 80, height: 80, position: 'absolute', borderWidth: 1, borderStyle: 'dashed',borderRadius: 20, borderColor: '#FFF', justifyContent: 'center', alignItems: 'center'}}>
                     {this.state.cardsBoard.length==0?
-                      <Text style={{color: '#FFF', textAlign: 'center'}}>Drop your card here</Text>
+                      <Text style={{color: '#FFF', textAlign: 'center'}}>{i18n.t('game.dropCardHere')}</Text>
                       :
                       Object.keys(this.state.cardsBoard).map((key) => (
                         <View key={key} style={styles.containerCard}>
@@ -367,7 +299,6 @@ const seatsList = [
                   </View>
                 </View>
               </View>
-
             </ImageBackground>
             <PokerHand
               dropCardFromDeckToBoard={this.dropCardFromDeckToBoard}

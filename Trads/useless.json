@@ -1,0 +1,33 @@
+[
+  {
+    "URL": "https://api.myjson.com/bins/15yvwq",
+  },
+  {
+    "userId": 1,
+    "id": 1,
+    "title": "Poker",
+    "players": 3,
+    "body": "body1"
+  },
+  {
+    "userId": 1,
+    "id": 2,
+    "title": "BlackJack",
+    "players": 2,
+    "body": "body2"
+  },
+  {
+    "userId": 1,
+    "id": 3,
+    "title": "Texas Hold'em",
+    "players": 2,
+    "body": "body3"
+  },
+  {
+    "userId": 1,
+    "id": 4,
+    "title": "Bataille",
+    "players": 4,
+    "body": "body4"
+  }
+]

@@ -1,121 +1,35 @@
-import { StyleSheet, Dimensions } from 'react-native'
+import {StyleSheet, Dimensions} from 'react-native'
 
 // const d = Dimensions.get("window")
 const window = Dimensions.get('window');
 const MARGIN_GAP = 0.025;
 
-
 const styles = StyleSheet.create({
 
-  screenWrap:{
-    // backgroundColor: '#000',
-
-  },
-  generalView:{
-    height: '100%',
+  screenView: {
+    height: '100%'
   },
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
-  brandLogoCont:{
+  brandLogoCont: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  brandLogo: {
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  brandLogo:{
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: window.height*MARGIN_GAP,
+    marginTop: window.height * MARGIN_GAP,
 
-    marginBottom: window.height*MARGIN_GAP,
+    marginBottom: window.height * MARGIN_GAP,
 
     width: 300,
-    height: 100,
+    height: 100
   },
 
-
-
-
-
-
-
-
-
-  // containerSeatOne:{
-  //   // alignItems: 'center',
-  //   // justifyContent: 'center',
-  //   // borderStyle: 'dashed',
-  //   // borderColor: '#FFF',
-  //   // borderWidth: 1,
-  //   // width: 100,
-  //   // height: 100,
-  //   // borderRadius: 100,
-  //   // position: 'absolute',
-  //   // top: window.height*0.115,
-  //   // right: window.height*0.015,
-  //
-  // },
-  //
-  // containerSeatTwo:{
-  //   // alignItems: 'center',
-  //   // justifyContent: 'center',
-  //   // borderStyle: 'dashed',
-  //   // borderColor: '#FFF',
-  //   // borderWidth: 1,
-  //   // width: 100,
-  //   // height: 100,
-  //   // borderRadius: 100,
-  //   // position: 'absolute',
-  //   // top: window.height*0.115,
-  //   // left: window.height*0.06,
-  //
-  // },
-  // containerSeatThree:{
-  //   // alignItems: 'center',
-  //   // justifyContent: 'center',
-  //   // borderStyle: 'dashed',
-  //   // borderColor: '#FFF',
-  //   // borderWidth: 1,
-  //   // width: 100,
-  //   // height: 100,
-  //   // borderRadius: 100,
-  //   // position: 'absolute',
-  //   // top: window.height*0.37,
-  //   // left: window.height*0.025,
-  //
-  // },
-  //
-  // containerSeatFour:{
-  //   // alignItems: 'center',
-  //   // justifyContent: 'center',
-  //   // borderStyle: 'dashed',
-  //   // borderColor: '#FFF',
-  //   // borderWidth: 1,
-  //   // width: 100,
-  //   // height: 100,
-  //   // borderRadius: 100,
-  //   // position: 'absolute',
-  //   // bottom: window.height*0.115,
-  //   // left: window.height*0.06,
-  // },
-  //
-  // containerSeatFive:{
-  //   // alignItems: 'center',
-  //   // justifyContent: 'center',
-  //   // borderStyle: 'dashed',
-  //   // borderColor: '#FFF',
-  //   // borderWidth: 1,
-  //   // width: 100,
-  //   // height: 100,
-  //   // borderRadius: 100,
-  //   // position: 'absolute',
-  //   // bottom: window.height*0.115,
-  //   // right: window.height*0.015,
-  // },
-
-
-  seatEmpty:{
+  seatEmpty: {
     zIndex: 999,
     alignItems: 'center',
     justifyContent: 'center',
@@ -125,10 +39,10 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 100,
-    position: 'absolute',
+    position: 'absolute'
   },
 
-  seatTaken:{
+  seatTaken: {
     backgroundColor: '#FFF',
     alignItems: 'center',
     justifyContent: 'center',
@@ -138,74 +52,66 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 100,
-    position: 'absolute',
+    position: 'absolute'
   },
 
-
-  seatEmptyTextElement:{
+  seatEmptyTextElement: {
     color: '#FFF',
     fontSize: 20,
     fontWeight: '500'
   },
 
-  seatTakenTextElement:{
+  seatTakenTextElement: {
     color: '#000',
     fontSize: 20,
     fontWeight: '500'
   },
 
-
-
-
-
-
-
   cardContainer: {
-      minHeight: 1000,
-      flex: 1,
-      backgroundColor: '#f3f3f3'
+    minHeight: 1000,
+    flex: 1,
+    backgroundColor: '#f3f3f3'
   },
   panel: {
-      position: 'absolute',
-      backgroundColor: '#bdbdbd',
-      flex: 1,
-      maxHeight: 200,
-      height: 200,
-      bottom: 0,
-      left: 0,
-      right: 0,
-      justifyContent: 'center'
+    position: 'absolute',
+    backgroundColor: '#bdbdbd',
+    flex: 1,
+    maxHeight: 200,
+    height: 200,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    justifyContent: 'center'
   },
   panelCard: {
-      backgroundColor: '#fff',
-      elevation: 2,
-      height: 150,
-      maxHeight: 150,
-      borderRadius: 10,
-      marginLeft: 10,
-      marginRight: 10,
-      justifyContent: 'center',
-      alignItems: 'center'
+    backgroundColor: '#fff',
+    elevation: 2,
+    height: 150,
+    maxHeight: 150,
+    borderRadius: 10,
+    marginLeft: 10,
+    marginRight: 10,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   dropCard: {
-      backgroundColor: '#fff',
-      height: 150,
-      maxHeight: 150,
-      elevation: 2,
-      borderRadius: 10,
-      position: 'absolute',
-      left: 10,
-      right: 10,
-      alignItems: 'center',
-      justifyContent: 'center'
+    backgroundColor: '#fff',
+    height: 150,
+    maxHeight: 150,
+    elevation: 2,
+    borderRadius: 10,
+    position: 'absolute',
+    left: 10,
+    right: 10,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
 
-
-  containerCard:{
+  containerCard: {
     flex: 1,
     // position: 'absolute'
   },
-  elementCard:{
+  elementCard: {
     width: 40,
     height: 70,
     borderRadius: 2,
@@ -214,7 +120,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     padding: 2
   },
-  elementCardBody:{
+  elementCardBody: {
     borderWidth: 1,
     borderColor: '#000',
     borderRadius: 2,
@@ -222,30 +128,25 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  elementSuit:{
+  elementSuit: {
     width: 15,
     height: 15
   },
-  elementValue:{
-
-  },
-
-
+  elementValue: {}
 });
 
-
-
 const buttons = StyleSheet.create({
-  container_start:{
+  container_start: {
     width: '100%',
-    height: 50,
+    height: 50
   },
-  start:{
+  start: {
     width: '100%',
-    height: 50,
+    height: 50
   }
 });
 
-
-
-export { styles, buttons }
+export {
+  styles,
+  buttons
+}

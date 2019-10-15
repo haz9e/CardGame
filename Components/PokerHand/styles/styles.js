@@ -24,25 +24,25 @@ const styles = StyleSheet.create({
 
 });
 
-const returnBtn = StyleSheet.create({
-  containerReturn: {
-    zIndex: 1,
-    padding: 10,
-    paddingTop: 30,
-    // backgroundColor: 'rgba(255, 255, 255, 0.3)',
+// const returnBtn = StyleSheet.create({
+//   containerReturn: {
+//     zIndex: 1,
+//     padding: 10,
+//     paddingTop: 30,
+//     // backgroundColor: 'rgba(255, 255, 255, 0.3)',
+//
+//   },
+//   placeholderReturn: {
+//     width: 30,
+//     height: 30,
+//     borderRadius: 100,
+//
+//   },
+//   imageReturn: {
+//     width: "100%",
+//     height: "100%",
+//     zIndex: 9
+//   }
+// });
 
-  },
-  placeholderReturn: {
-    width: 30,
-    height: 30,
-    borderRadius: 100,
-
-  },
-  imageReturn: {
-    width: "100%",
-    height: "100%",
-    zIndex: 9
-  }
-});
-
-export { styles, returnBtn }
+export { styles }

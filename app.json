@@ -8,6 +8,12 @@
     "sdkVersion": "35.0.0",
     "version": "1.0.0",
     "entryPoint": "node_modules/expo/AppEntry.js",
+    "ios": {
+    "bundleIdentifier": "com.valentin.cardgame"
+    },
+    "android": {
+      "package": "com.valentin.cardgame"
+    },
     "platforms": [
       "ios",
       "android",
