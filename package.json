@@ -17,7 +17,7 @@
     "expo-localization": "^7.0.0",
     "react": "16.8.3",
     "react-dom": "16.8.3",
-    "react-native": "0.59.10",
+    "react-native": "0.62.3",
     "react-native-android-keyboard-adjust": "^1.2.0",
     "react-native-calendars": "^1.212.0",
     "react-native-custom-picker": "^0.4.0",
